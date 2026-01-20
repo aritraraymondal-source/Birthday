@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink-1:#ffe0ef;
+      --pink-2:#f3e8ff;
+      --accent:#d63384;
+      --card-border:#ffd1e8;
+      --red:#e63946;
+      --soft-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--pink-1), var(--pink-2));
+      color: #5a2a44;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Decorative corner elements */
+    .corner {
+      position: fixed;
+      width: 160px;
+      height: 160px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .top-left { top: 0; left: 0; background-image: url('images/rose_corner.svg'); }
+    .top-right { top: 0; right: 0; background-image: url('images/moon_corner.svg'); }
+    .bottom-left { bottom: 0; left: 0; background-image: url('images/ribbon_corner.svg'); }
+    .bottom-right { bottom: 0; right: 0; background-image: url('images/glitter_corner.svg'); }
+
+    /* Glitter overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(#ffd1eb 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3.2rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 70px 16px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    section h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      color: #c2186a;
+      margin-bottom: 25px;
+    }
+
+    .message {
+      max-width: 760px;
+      margin: auto;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      background: linear-gradient(135deg, #ffffff, #fff3f9);
+      padding: 30px;
+      border-radius: 28px;
+      border: 3px solid var(--card-border);
+      box-shadow: var(--soft-shadow);
+      text-align: left;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #ff85b3, #ffb3d9);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+    .btn.secondary { background:#ff5c8a; margin-left:12px; }
+
+    .poem-album {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 10px;
+      justify-content: center;
+    }
+    .poem-card {
+      min-width: 260px;
+      padding: 24px;
+      background: linear-gradient(135deg, #fff, #fff0f7);
+      border-radius: 28px;
+      border: 3px solid var(--card-border);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+    .poem-card h3 { font-family: 'Pacifico', cursive; color: var(--accent); margin-bottom:10px; }
+    .preview { font-size:0.95rem; opacity:0.85; margin:0; }
+    .full-poem { display:none; margin-top:16px; white-space:pre-line; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .gallery-item { text-align: center; }
+    .gallery-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid var(--red);
+      box-shadow: 0 12px 28px rgba(230, 57, 70, 0.28);
+      transition: transform 0.4s;
+    }
+    .gallery-item img:hover { transform: scale(1.06) rotate(-1deg); }
+    .caption { margin-top:10px; font-size:0.95rem; color:#6a2a3e; }
+
+    .video-album { display:flex; gap:28px; justify-content:center; flex-wrap:wrap; }
+    .video-card { max-width:420px; background: linear-gradient(135deg, #ffffff, #fff1f8); padding:20px; border-radius:22px; border:3px solid var(--card-border); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+    .video-card iframe { width:100%; height:250px; border-radius:14px; border:0; }
+
+    /* Transform section */
+    .transform-top { display:flex; gap:20px; align-items:center; justify-content:center; flex-wrap:wrap; max-width:1000px; margin:auto; }
+    .transform-top img { width:360px; max-width:100%; height:400px; object-fit:cover; border-radius:22px; border:4px solid var(--red); box-shadow:0 14px 32px rgba(230,57,70,0.35); }
+    .transform-text { max-width:520px; text-align:left; }
+
+    /* Popup */
+    #popup {
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:999;
+      justify-content:center;
+      align-items:center;
+      background: rgba(255,182,213,0.85);
+    }
+    .popup-panel {
+      background:white;
+      padding:36px;
+      border-radius:18px;
+      max-width:560px;
+      text-align:center;
+      box-shadow:0 15px 30px rgba(0,0,0,0.2);
+    }
+    .popup-panel h2{ font-family:'Pacifico', cursive; color:var(--accent); margin:0 0 12px 0; }
+    .popup-close { margin-top:18px; padding:10px 20px; border-radius:12px; border:none; background:#ff85b3; color:white; cursor:pointer; }
+
+    footer { padding:30px 20px; background: linear-gradient(135deg, #ffd1eb, #ffe9f5); text-align:center; font-size:0.9rem; position:relative; z-index:1; margin-top:30px; }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.4rem; }
+      .gallery { grid-template-columns: 1fr; }
+      .transform-top { flex-direction:column; }
+      .video-card iframe { height:200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="corner top-left" aria-hidden="true"></div>
+  <div class="corner top-right" aria-hidden="true"></div>
+  <div class="corner bottom-left" aria-hidden="true"></div>
+  <div class="corner bottom-right" aria-hidden="true"></div>
+
+  <header>
+    <h1>Happy Birthday, Rose 🌹🎀</h1>
+    <p>
+      Today is for you, Rose — for the comfort you bring, the quiet strength you hold, and the gentle warmth
+      that makes every ordinary moment feel like a small celebration. I hope this little site carries all the
+      smiles, memories, and love I have for you.
+    </p>
+    <div style="margin-top:16px;">
+      <button id="openMessageBtn" class="btn">Open Your Surprise 💖</button>
+    </div>
+  </header>
+
+  <!-- MESSAGE SECTION -->
+  <section id="message">
+    <h2>A Little Message for You</h2>
+    <div class="message">
+      <p>
+        On your special day, Rose, I just want you to know how deeply loved you are 🌹
+        Not loudly, not in grand gestures — but in a way that is steady, sincere, and always present.
+      </p>
+      <p>
+        May this year bring you soft smiles, glittering dreams, and moments that feel like warm hugs. You deserve
+        a world as gentle and magical as you are. 💕
+      </p>
+      <div style="text-align:center;">
+        <button id="scrollToProposal" class="btn">One Last Question 💖</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POEMS SECTION -->
+  <section id="poems">
+    <h2>Three Little Poems 💌</h2>
+    <div class="poem-album">
+      <div class="poem-card" data-toggle="poem">
+        <h3>Poem One 🌹</h3>
+        <p class="preview">Tere ishq mein fanaa ho jau... Click to read more 💖</p>
+        <div class="full-poem">
+Tere ishq mein fanaa ho jau,
+Girta hi jau aakhon ki husn mein.
+Khushboo ban ke teri saanson mein ghul jau,
+Tere khayalon ke aasmaan mein khil jau. ❤️
+
+Tere ishq mein ghar basa lu,
+Apna bana lu tujhe.
+Tere saath likhu main har kal apna,
+Zindagi banu teri har sukoon mein. ❤️
+        </div>
+      </div>
+
+      <div class="poem-card" data-toggle="poem">
+        <h3>Poem Two 🌙</h3>
+        <p class="preview">In every prayer of mine... Click to read more 💖</p>
+        <div class="full-poem">
+In every prayer of mine,
+I seek your presence, pure, divine.
+In every devotion, deep and true,
+My heart bows only to you.
+
+I wish you’d stay, not drift away,
+I wish you'd choose me, come what may.
+        </div>
+      </div>
+
+      <div class="poem-card" data-toggle="poem">
+        <h3>Poem Three ✨</h3>
+        <p class="preview">A quiet glance, a gentle smile... Click to read more 💖</p>
+        <div class="full-poem">
+A quiet glance, a gentle smile,
+A hope that stays with me awhile.
+If love could speak in whispered light,
+I'd hold your hand through every night.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORM / GALLERY SECTION -->
+  <section>
+    <h2>Your Beautiful Journey 🌷</h2>
+    <div class="transform-top">
+      <img src="images/childhood_image.svg" alt="Childhood memory" loading="lazy" />
+      <div class="transform-text">
+        <p>
+          From a little girl with quiet dreams in her eyes to the radiant person you are today — every step,
+          every smile, every small bravery has shaped this beautiful journey. Thank you for letting me be a part
+          of it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <h2>Our Beautiful Memories 📸</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="images/image1.svg" alt="Memory 1" loading="lazy">
+        <div class="caption">A smile I’ll always remember 🌹 — 21/12/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image2.svg" alt="Memory 2" loading="lazy">
+        <div class="caption">Adventure curves memories 🌙 — 01/10/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image3.svg" alt="Memory 3" loading="lazy">
+        <div class="caption">First time, you felt special 💖 — 14/02/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image4.svg" alt="Memory 4" loading="lazy">
+        <div class="caption">Late night talks & laughter ✨ — 05/06/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image5.svg" alt="Memory 5" loading="lazy">
+        <div class="caption">Captured love — 10/08/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image6.svg" alt="Memory 6" loading="lazy">
+        <div class="caption">That beautiful sunset 🌅 — 20/09/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image7.svg" alt="Memory 7" loading="lazy">
+        <div class="caption">Diwali and late night walk 💞 — 20/10/2025</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/image8.svg" alt="Memory 8" loading="lazy">
+        <div class="caption">Food & gossips 🌷 — 05/11/2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO MEMORIES -->
+  <section id="videos">
+    <h2>Little Moving Memories 🎥</h2>
+    <div class="video-album">
+      <div class="video-card">
+        <!-- VIDEO 1 -->
+        <iframe src="https://drive.google.com/file/d/15SamEevqgV_QXVpoOMPqddRXa01Berik/preview" title="Video Memory 1" allowfullscreen></iframe>
+        <p class="video-note">Its the eyes, where I melted and your elegance nailed it 💕</p>
+      </div>
+
+      <div class="video-card">
+        <!-- VIDEO 2 -->
+        <iframe src="https://drive.google.com/file/d/1vKcbGDjULCGh04nDJ1SZevQ4b5n42iUv/preview" title="Video Memory 2" allowfullscreen></iframe>
+        <p class="video-note">The quiet character, but your beauty draws me closer 🌙</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPOSAL SECTION -->
+  <section id="proposal">
+    <h2>One Last Question 💖</h2>
+    <div class="message" style="text-align:center;">
+      <p>After all the smiles, memories, and moments we share… I just want to ask you one thing.</p>
+      <p style="font-size:1.15rem; font-weight:600;">Will you grow old together? year after year after year ? 💍✨</p>
+      <div style="margin-top:20px;">
+        <button id="acceptBtn" class="btn">Yes 💕</button>
+        <button id="rejectBtn" class="btn secondary">No 🙈</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPUP MESSAGE -->
+  <div id="popup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="popup-panel" role="document">
+      <h2>She Said YES! 🎉💖</h2>
+      <p style="font-size:1.05rem; line-height:1.6; margin-top:12px;">
+        You’ve just made me the happiest person alive. Thank you for choosing me, for trusting me,
+        and for letting our story grow even more beautiful from here. 🌸✨
+      </p>
+      <button id="closePopupBtn" class="popup-close">Close 💞</button>
+    </div>
+  </div>
+
+  <footer>
+    Made with 💖 just for you | Happy Birthday 🎂
+  </footer>
+
+  <script>
+    // DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Buttons
+      const openMessageBtn = document.getElementById('openMessageBtn');
+      const scrollToProposalBtn = document.getElementById('scrollToProposal');
+      const acceptBtn = document.getElementById('acceptBtn');
+      const rejectBtn = document.getElementById('rejectBtn');
+      const popup = document.getElementById('popup');
+      const closePopupBtn = document.getElementById('closePopupBtn');
+
+      openMessageBtn?.addEventListener('click', () => {
+        document.getElementById('message')?.scrollIntoView({behavior:'smooth'});
+      });
+
+      scrollToProposalBtn?.addEventListener('click', () => {
+        document.getElementById('proposal')?.scrollIntoView({behavior:'smooth'});
+      });
+
+      acceptBtn?.addEventListener('click', () => {
+        showPopup();
+      });
+
+      rejectBtn?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      closePopupBtn?.addEventListener('click', hidePopup);
+
+      // Allow closing popup by clicking outside the panel
+      popup?.addEventListener('click', function(e) {
+        if (e.target === popup) hidePopup();
+      });
+
+      // Close popup by Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hidePopup();
+      });
+
+      function showPopup() {
+        popup.style.display = 'flex';
+        popup.setAttribute('aria-hidden','false');
+      }
+
+      function hidePopup() {
+        popup.style.display = 'none';
+        popup.setAttribute('aria-hidden','true');
+      }
+
+      // Poem toggles
+      const poemCards = document.querySelectorAll('[data-toggle="poem"]');
+      poemCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const poem = card.querySelector('.full-poem');
+          if (!poem) return;
+          if (poem.style.display === 'block') {
+            poem.style.display = 'none';
+          } else {
+            // hide other open poems for better UX
+            document.querySelectorAll('.full-poem').forEach(p => {
+              if (p !== poem) p.style.display = 'none';
+            });
+            poem.style.display = 'block';
+            poem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // Image lazy-loading: set loading="lazy" for gallery images
+      document.querySelectorAll('.gallery-item img').forEach(img => img.setAttribute('loading','lazy'));
+    });
+  </script>
+
+</body>
+</html>

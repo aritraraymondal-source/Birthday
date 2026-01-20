@@ -1,0 +1,56 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: GitHub Copilot <copilot@local>
+Date: Tue, 20 Jan 2026 00:00:00 +0000
+Subject: [PATCH] Add cleaned site: replace index.html, add images and README
+
+---
+ index.html                                     | 1876 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ README.md                                      |  241 +++++++
+ images/childhood_image.svg                     |   86 +++
+ images/glitter_corner.svg                      |   64 ++
+ images/image1.svg                               |   80 ++
+ images/image2.svg                               |   80 ++
+ images/image3.svg                               |   80 ++
+ images/image4.svg                               |   80 ++
+ images/image5.svg                               |   80 ++
+ images/image6.svg                               |   80 ++
+ images/image7.svg                               |   80 ++
+ images/image8.svg                               |   80 ++
+ images/moon_corner.svg                          |   64 ++
+ images/ribbon_corner.svg                        |   64 ++
+ images/rose_corner.svg                          |   64 ++
+ 14 files changed, 3309 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 README.md
+ create mode 100644 images/childhood_image.svg
+ create mode 100644 images/glitter_corner.svg
+ create mode 100644 images/image1.svg
+ create mode 100644 images/image2.svg
+ create mode 100644 images/image3.svg
+ create mode 100644 images/image4.svg
+ create mode 100644 images/image5.svg
+ create mode 100644 images/image6.svg
+ create mode 100644 images/image7.svg
+ create mode 100644 images/image8.svg
+ create mode 100644 images/moon_corner.svg
+ create mode 100644 images/ribbon_corner.svg
+ create mode 100644 images/rose_corner.svg
+-- 
+1.9.4
+
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,1876 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <title>Happy Birthday ❤️</title>
++  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
++  <style>
++    :root{
++      --pink-1:#ffe0ef
