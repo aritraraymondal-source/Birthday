@@ -1,0 +1,5 @@
+<!-- Simple decorative corner SVG (glitter) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="20" fill="#fff3f9"/>
+  <text x="50%" y="50%" font-family="Poppins, sans-serif" font-size="14" fill="#c2186a" text-anchor="middle" dominant-baseline="middle">GLITTER</text>
+</svg>
